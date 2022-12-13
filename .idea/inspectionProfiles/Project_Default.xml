@@ -5,6 +5,7 @@
       <option name="excludeList">
         <list>
           <option value="com.codeborne:selenide" />
+          <option value="io.qameta.allure:allure-selenide" />
         </list>
       </option>
     </inspection_tool>

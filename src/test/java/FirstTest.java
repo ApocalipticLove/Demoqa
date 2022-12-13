@@ -1,6 +1,4 @@
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -9,20 +7,18 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 
-    public class FirstTest {
-        @BeforeAll
-        static void beforeAll() {
-            Configuration.holdBrowserOpen = true;
-            Configuration.browserSize = "1920x1080";
-            Configuration.baseUrl = "https://demoqa.com";
-        }
+public class FirstTest extends TestBase {
+
         @Test
         protected void fillFormTest() {
-            open("/automation-practice-form");
-            executeJavaScript("$('footer').remove()");
-            executeJavaScript("$('#fixedban').remove()");
-
+            step("Open registration form", () -> {
+                        open("/automation-practice-form");
+                        executeJavaScript("$('footer').remove()");
+                        executeJavaScript("$('#fixedban').remove()");
+            });
+            step("Fill form", () -> {
             $("#firstName").setValue("Dmitrii");
             $("#lastName").setValue("Aleksandrov");
             $("#userEmail").setValue("123@mail.com");
@@ -44,6 +40,8 @@ import static com.codeborne.selenide.Selenide.*;
             $("#city").click();
             $(byText("Gurgaon")).click();
             $("#submit").click();
+            });
+                step("Check form results", () -> {
             $(".modal-content").shouldBe(visible);
             $(".modal-body").shouldHave(text("Dmitrii"),
                     text("Dmitrii"),
@@ -58,7 +56,7 @@ import static com.codeborne.selenide.Selenide.*;
                     text("Lenina street 1"),
                     text("NCR"),
                     text("Gurgaon"));
-
+                });
         }
     }
 
