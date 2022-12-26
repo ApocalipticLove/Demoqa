@@ -41,7 +41,7 @@ public class FirstTest extends TestBase {
             $(byText("Gurgaon")).click();
             $("#submit").click();
             });
-                step("Check form results", () -> {
+            step("Check form results", () -> {
             $(".modal-content").shouldBe(visible);
             $(".modal-body").shouldHave(text("Dmitrii"),
                     text("Dmitrii"),
